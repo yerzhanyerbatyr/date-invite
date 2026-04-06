@@ -3,12 +3,12 @@ import { useMemo, useState } from "react";
 export default function App() {
   const [accepted, setAccepted] = useState(false);
 
-  const balloons = useMemo(
+  const hearts = useMemo(
     () =>
-      Array.from({ length: 20 }, (_, i) => ({
+      Array.from({ length: 25 }, (_, i) => ({
         id: i,
         left: 5 + Math.random() * 90,
-        size: 60 + Math.random() * 40,
+        size: 20 + Math.random() * 30,
         duration: 4 + Math.random() * 3,
         delay: Math.random() * 1.5,
         drift: -80 + Math.random() * 160,
@@ -19,7 +19,7 @@ export default function App() {
   return (
     <>
       <style>{`
-        @keyframes floatBalloon {
+        @keyframes floatHeart {
           0% { transform: translateY(0); opacity: 0; }
           10% { opacity: 1; }
           100% { transform: translateY(-120vh) translateX(var(--drift)); opacity: 0; }
@@ -30,24 +30,24 @@ export default function App() {
 
         {accepted && (
           <div className="absolute inset-0 pointer-events-none z-20">
-            {balloons.map((b) => (
-              <img
-                key={b.id}
-                src="/heart.png"
-                alt="balloon"
+            {hearts.map((h) => (
+              <div
+                key={h.id}
                 className="absolute"
                 style={{
-                  left: `${b.left}%`,
-                  bottom: "-120px",
-                  width: `${b.size}px`,
-                  animationName: "floatBalloon",
-                  animationDuration: `${b.duration}s`,
+                  left: `${h.left}%`,
+                  bottom: "-50px",
+                  fontSize: `${h.size}px`,
+                  animationName: "floatHeart",
+                  animationDuration: `${h.duration}s`,
                   animationTimingFunction: "ease-in-out",
                   animationIterationCount: "infinite",
-                  animationDelay: `${b.delay}s`,
-                  "--drift": `${b.drift}px`,
+                  animationDelay: `${h.delay}s`,
+                  "--drift": `${h.drift}px`,
                 }}
-              />
+              >
+                💕
+              </div>
             ))}
           </div>
         )}
